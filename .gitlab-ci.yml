@@ -1,0 +1,12 @@
+device_logs:
+  image:
+    name: skullfighter6/device-logs:latest
+    entrypoint: ["/bin/bash", "-c", "./entrypoint.sh"]
+  variables:
+    SOURCE: "/app/socat-pty2"
+    LOG_FILE: "/tmp/device.log"
+  artifacts:
+    when: always
+    paths:
+      - /tmp/device.log
+  script: "echo Simulating 10 log entries and collecting them as an artifact.."

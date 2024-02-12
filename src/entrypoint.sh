@@ -5,7 +5,7 @@ function dummy_writer() {
     while true; do
         RANDOM_MSG="Generated sample is $(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)"
 
-        echo ${RANDOM_MSG} > ${HOME}/socat-pty1
+        echo ${RANDOM_MSG} > ./socat-pty1
 
         sleep 5
     done
@@ -13,7 +13,7 @@ function dummy_writer() {
 
 
 # Create 2 virtual serial ports;
-/bin/bash -c "socat -d -d pty,raw,echo=1,link=${HOME}/socat-pty1 pty,raw,echo=1,link=${HOME}/socat-pty2 &"
+/bin/bash -c "socat -d -d pty,raw,echo=1,link=./socat-pty1 pty,raw,echo=1,link=./socat-pty2 &"
 sleep 2
 
 # Simulate fake logging messages;

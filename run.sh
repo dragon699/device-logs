@@ -13,7 +13,7 @@ LOG_FILE="device.log"
 SOURCE=
 
 
-[[ -z ${SOURCE} ]] && SOURCE=${HOME}/socat-pty2
+[[ -z ${SOURCE} ]] && SOURCE=/app/socat-pty2
 
 docker build -t device-logs .
 docker run -d -v $(pwd)/logs/:/tmp/:rw -e SOURCE=${SOURCE} -e LOG_FILE=/tmp/${LOG_FILE} device-logs /bin/bash -c './entrypoint.sh'

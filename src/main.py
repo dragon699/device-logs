@@ -1,12 +1,12 @@
 from sys import argv
 from datetime import datetime
 import serial, argparse
-import os
 
 
-HOME_DIR = os.environ.get('HOME', os.path.expanduser('~'))
-LOG_FILE = '{}/device-logs.log'.format(HOME_DIR)
-
+# Number of log entries to write to the file;
+# before exiting;
+COUNT = 10
+LOG_FILE = '/tmp/device.log'
 
 
 class Parser:
@@ -39,6 +39,7 @@ class Serial_Communicator:
     def __init__(self, source, file):
         self.source = source
         self.file = file
+        self.current_count = 0
 
         self.log_msg = lambda msg: '[{}] {}'.format(
             datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
@@ -65,6 +66,8 @@ class Serial_Communicator:
             serial_value = str(self.reader.readline(), 'UTF-8')
 
             if len(serial_value) > 0:
+                self.current_count += 1
+
                 print(
                     self.log_msg('WRITING: {}'.format(serial_value)),
                     end=''
@@ -73,8 +76,13 @@ class Serial_Communicator:
                 with open(self.file, 'a') as dest:
                     dest.write(self.log_msg(serial_value))
 
+            if self.current_count >= COUNT:
+                break
+
+        return True
+
 
 if __name__ == '__main__':
     args = Parser().parser.parse_args()
-    
+
     Serial_Communicator(args.source, args.file)
