@@ -12,10 +12,12 @@ This deployment method can accept 2 inputs that can be configured inside `run.sh
   - b. The first virtual port will transmit the messages to the second one
   - c. The python application will read the messages from the second virtual port and put them in the log file defined in `LOG_FILE`
   - d. After receiving 10 messages, the container will shut down
+
 If using the virtual way (`socat`), a. and b. are not relevant.
 
 #### In GitLab
 To deploy in a GitLab CI job, fork this repository into your GitLab server (instance) as a new repository and the deployment will start from `.gitlab-ci.yml`. Using this deployment method, the docker image was pre-built in advance in my personal repository, so `run.sh` is not relevant in this case.
+
 Currently I did not include `variables:` section in the top level of `.gitlab-ci.yml`, so this deployment method requires `SOURCE` and `LOG_FILE` to be manually adjusted in the `.gitlab-ci.yml` file.
 
 ## Set-up a runner in GitLab
