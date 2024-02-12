@@ -16,7 +16,7 @@ This deployment method can accept 2 inputs that can be configured inside `run.sh
 If using a physical serial port, a. and b. (`socat` way) are not relevant.
 
 #### In GitLab
-To deploy in a GitLab CI job, fork this repository into your GitLab server (instance) as a new repository and the deployment will start from `.gitlab-ci.yml`. Using this deployment method, the docker image was pre-built in advance in my personal repository, so `run.sh` is not relevant in this case.
+To deploy in a GitLab CI job, fork this repository into your GitLab server (instance) as a new repository and the deployment will start from `.gitlab-ci.yml`. Using this deployment method, the docker image was pre-built in advance in my personal DockerHub repository, so `run.sh` is not relevant in this case.
 
 Currently I did not include `variables:` section in the top level of `.gitlab-ci.yml`, so this deployment method requires `SOURCE` and `LOG_FILE` to be manually adjusted in the `.gitlab-ci.yml` file.
 
