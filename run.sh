@@ -3,7 +3,7 @@
 
 # Log file to write data to;
 # Will be mounted on the host machine as well;
-# in ./device-logs directory;
+# in ./logs directory;
 LOG_FILE="device.log"
 
 
@@ -16,4 +16,4 @@ SOURCE=
 [[ -z ${SOURCE} ]] && SOURCE=${HOME}/socat-pty2
 
 docker build -t device-logs .
-docker run -d -v $(pwd)/device-logs/${LOG_FILE}/:/tmp/:rw -e SOURCE=${SOURCE} -e LOG_FILE=/tmp/${LOG_FILE} device-logs /bin/bash -c './entrypoint.sh'
+docker run -d -v $(pwd)/logs/:/tmp/:rw -e SOURCE=${SOURCE} -e LOG_FILE=/tmp/${LOG_FILE} device-logs /bin/bash -c './entrypoint.sh'

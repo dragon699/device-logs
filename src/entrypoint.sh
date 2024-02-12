@@ -7,7 +7,7 @@ function dummy_writer() {
 
         echo ${RANDOM_MSG} > ${HOME}/socat-pty1
 
-        sleep 10
+        sleep 5
     done
 }
 
